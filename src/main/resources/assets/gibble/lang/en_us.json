@@ -1,0 +1,13 @@
+{
+  "itemGroup.gibble": "Example Mod Tab",
+  "block.gibble.example_block": "Example Block",
+  "item.gibble.example_item": "Example Item",
+
+  "gibble.configuration.title": "gibble Configs",
+  "gibble.configuration.section.gibble.common.toml": "gibble Configs",
+  "gibble.configuration.section.gibble.common.toml.title": "gibble Configs",
+  "gibble.configuration.items": "Item List",
+  "gibble.configuration.logDirtBlock": "Log Dirt Block",
+  "gibble.configuration.magicNumberIntroduction": "Magic Number Text",
+  "gibble.configuration.magicNumber": "Magic Number"
+}
