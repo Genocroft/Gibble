@@ -1,6 +1,5 @@
-package com.genocraft.gibble.entity.custom;
+package com.genocraft.gibble.entity.entity;
 
-import com.genocraft.gibble.entity.ModEntities;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.AnimationState;
@@ -16,11 +15,14 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 public class GibbleEntity extends Animal {
-    public final AnimationState idleAnimationState = new AnimationState();
-    private int idleAnimationTimeout = 0;
 
     public GibbleEntity(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
+    }
+
+    @Override
+    public boolean isFood(ItemStack itemStack) {
+        return false;
     }
 
     @Override
@@ -40,31 +42,8 @@ public class GibbleEntity extends Animal {
                 .add(Attributes.ARMOR_TOUGHNESS, 1d);
     }
 
-    private void setupAnimationStates() {
-        if(this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = 80;
-            this.idleAnimationState.start(this.tickCount);
-        } else {
-            --this.idleAnimationTimeout;
-        }
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-
-        if(this.level().isClientSide()) {
-            this.setupAnimationStates();
-        }
-    }
-
-    @Override
-    public boolean isFood(ItemStack itemStack) {
-        return false;
-    }
-
     @Override
     public @Nullable AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-        return ModEntities.GIBBLE.get().create(serverLevel);
+        return null;
     }
 }
