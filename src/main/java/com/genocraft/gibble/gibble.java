@@ -1,12 +1,13 @@
 package com.genocraft.gibble;
 
+import com.genocraft.gibble.entity.client.GibbleRenderer;
 import com.genocraft.gibble.entity.entity.ModEntities;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
-
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
@@ -29,11 +30,19 @@ public class gibble {
     public gibble(IEventBus modEventBus,  ModContainer modContainer) {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
-
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (gibble) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
+
+        ModEntities.register(modEventBus);
+
+        modEventBus.addListener(this::addCreative);
+        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+    }
+
+    private void addCreative(BuildCreativeModeTabContentsEvent event) {
+
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
@@ -47,11 +56,22 @@ public class gibble {
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static void ClientModEvents {
+    public class ClientModEvents {
+
+        public static void register(IEventBus modEventBus) {
+            modEventBus.addListener(ClientModEvents::onClientSetup);
+            modEventBus.addListener(ClientModEvents::registerRenderers);
+        }
+
+        // will add spawn egg later and custom drop later.
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             ModItemProperties.addCustomItemProperties();
+        }
+
+        @SubscribeEvent
+        public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerEntityRenderer(ModEntities.GIBBLE.get(), GibbleRenderer::new);
         }
     }
 }
