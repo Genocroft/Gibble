@@ -2,8 +2,8 @@ package com.genocraft.gibble;
 
 import com.genocraft.gibble.entity.client.GibbleRenderer;
 import com.genocraft.gibble.entity.entity.ModEntities;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.fml.common.EventBusSubscriber;
+import com.genocraft.gibble.item.CreativeModeTabs;
+import com.genocraft.gibble.item.ModItems;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import org.slf4j.Logger;
@@ -36,6 +36,8 @@ public class gibble {
         NeoForge.EVENT_BUS.register(this);
 
         ModEntities.register(modEventBus);
+        ModItems.register(modEventBus);
+        CreativeModeTabs.register(modEventBus);
 
         modEventBus.addListener(this::addCreative);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
@@ -66,7 +68,6 @@ public class gibble {
         // will add spawn egg later and custom drop later.
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            ModItemProperties.addCustomItemProperties();
         }
 
         @SubscribeEvent

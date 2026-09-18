@@ -15,7 +15,7 @@ public class GibbleRenderer extends MobRenderer<GibbleEntity, GibbleModel<Gibble
 
     @Override
     public ResourceLocation getTextureLocation(GibbleEntity entity) {
-        return ResourceLocation.fromNamespaceAndPath(gibble.MOD_ID, "textures/entities/gibble/gibble_texture.png");
+        return ResourceLocation.fromNamespaceAndPath(gibble.MOD_ID, "textures/entities/item/gibble_texture.png");
     }
 
     @Override

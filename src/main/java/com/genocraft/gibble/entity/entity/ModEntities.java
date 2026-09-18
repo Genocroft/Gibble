@@ -17,7 +17,7 @@ public class  ModEntities {
 
     public static final Supplier<EntityType<GibbleEntity>> GIBBLE =
             ENTITY_TYPES.register("gibble", () -> EntityType.Builder.of(GibbleEntity::new, MobCategory.CREATURE)
-                    .sized(0.75f, 0.35f).build("gibble"));
+                    .sized(0.35f, 0.25f).build("gibble"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
