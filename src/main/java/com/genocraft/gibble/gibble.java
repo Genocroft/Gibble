@@ -38,7 +38,7 @@ public class gibble {
         ModEntities.register(modEventBus);
         ModItems.register(modEventBus);
         CreativeModeTabs.register(modEventBus);
-
+        ClientModEvents.register(modEventBus);
         modEventBus.addListener(this::addCreative);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
@@ -58,7 +58,7 @@ public class gibble {
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
-    public class ClientModEvents {
+    public static class ClientModEvents {
 
         public static void register(IEventBus modEventBus) {
             modEventBus.addListener(ClientModEvents::onClientSetup);
