@@ -1,7 +1,6 @@
-// Made with Blockbench 5.2.1
-// Exported for Minecraft version 1.17 or later with Mojang mappings
-// Paste this class into your mod and generate all required imports
 package com.genocraft.gibble.entity.client;
+
+
 import com.genocraft.gibble.entity.entity.GibbleEntity;
 import com.genocraft.gibble.gibble;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -20,53 +19,53 @@ public class GibbleModel<T extends GibbleEntity> extends HierarchicalModel<T> {
 	private final ModelPart Torso;
 	private final ModelPart Antenna;
 	private final ModelPart Face;
-	private final ModelPart Eyes;
-	private final ModelPart Mouth;
 
 	public GibbleModel(ModelPart root) {
 		this.Gibble = root.getChild("Gibble");
 		this.Torso = this.Gibble.getChild("Torso");
 		this.Antenna = this.Gibble.getChild("Antenna");
 		this.Face = this.Gibble.getChild("Face");
-		this.Eyes = this.Face.getChild("Eyes");
-		this.Mouth = this.Face.getChild("Mouth");
 	}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition Gibble = partdefinition.addOrReplaceChild("Gibble", CubeListBuilder.create(), PartPose.offset(0.0F, 17.9722F, 1.6333F));
+		PartDefinition Gibble = partdefinition.addOrReplaceChild("Gibble", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-		PartDefinition Torso = Gibble.addOrReplaceChild("Torso", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 2.0278F, -1.3667F));
+		PartDefinition Torso = Gibble.addOrReplaceChild("Torso", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition Antenna = Gibble.addOrReplaceChild("Antenna", CubeListBuilder.create().texOffs(0, 16).addBox(-1.0F, -2.0F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
-				.texOffs(8, 16).addBox(-0.5F, 0.0F, -0.5F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -3.9722F, -1.3667F));
+		PartDefinition Antenna = Gibble.addOrReplaceChild("Antenna", CubeListBuilder.create().texOffs(0, 16).addBox(-1.0F, -8.0F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+		.texOffs(12, 21).addBox(-1.5F, -7.5F, -1.0F, 0.5F, 1.0F, 2.0F, new CubeDeformation(0.0F))
+		.texOffs(16, 21).addBox(1.0F, -7.5F, -1.0F, 0.5F, 1.0F, 2.0F, new CubeDeformation(0.0F))
+		.texOffs(9, 20).addBox(-0.5F, -8.5F, -0.5F, 1.0F, 0.5F, 1.0F, new CubeDeformation(0.0F))
+		.texOffs(8, 16).addBox(-0.5F, -6.0F, -0.5F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -4.0F, 0.0F));
 
-		PartDefinition Face = Gibble.addOrReplaceChild("Face", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 1.9444F, -5.4333F, 0.0F, 3.1416F, 0.0F));
+		PartDefinition cube_r1 = Antenna.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(18, 21).addBox(-1.0F, -1.5F, -1.0F, 0.5F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -6.0F, -2.0F, 0.0F, 1.5708F, 0.0F));
 
-		PartDefinition Eyes = Face.addOrReplaceChild("Eyes", CubeListBuilder.create().texOffs(12, 16).addBox(1.0F, -1.0F, 0.0F, 2.0F, 2.0F, 0.0F, new CubeDeformation(0.0F))
-				.texOffs(16, 16).addBox(-3.0F, -1.0F, 0.0F, 2.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -1.9167F, 0.0333F));
+		PartDefinition cube_r2 = Antenna.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(8, 22).addBox(-1.5F, -1.5F, -1.0F, 0.5F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -6.0F, 0.0F, 0.0F, 1.5708F, 0.0F));
 
-		PartDefinition Mouth = Face.addOrReplaceChild("Mouth", CubeListBuilder.create().texOffs(12, 18).addBox(-1.0F, 0.1667F, 0.0F, 2.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
-				.texOffs(16, 18).addBox(-2.0F, -0.8333F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
-				.texOffs(18, 18).addBox(1.0F, -0.8333F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 1.9167F, 0.0333F));
+		PartDefinition Face = Gibble.addOrReplaceChild("Face", CubeListBuilder.create().texOffs(12, 16).addBox(-1.0F, 1.42F, 0.0F, 2.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
+		.texOffs(14, 17).addBox(-2.0F, -2.58F, 0.0F, 1.5F, 1.0F, 0.0F, new CubeDeformation(0.0F))
+		.texOffs(16, 16).addBox(-2.0F, 0.42F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
+		.texOffs(12, 17).addBox(1.0F, 0.42F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
+		.texOffs(16, 17).addBox(1.0F, -2.58F, 0.0F, 1.5F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -3.42F, -4.1F));
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}
 
 	@Override
-	public void setupAnim(GibbleEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-		Gibble.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int colors) {
+		Gibble.render(poseStack, vertexConsumer, packedLight, packedOverlay, colors);
 	}
 
 	@Override
 	public ModelPart root() {
 		return Gibble;
+	}
+
+	@Override
+	public void setupAnim(T t, float v, float v1, float v2, float v3, float v4) {
+
 	}
 }
